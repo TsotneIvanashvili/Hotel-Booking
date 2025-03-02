@@ -5,7 +5,7 @@
 
 body{
     height: 130vh;
-
+    background-color: rgb(248, 248, 248);
 }
 
 section{
@@ -174,3 +174,93 @@ header {
 }
 
 
+.room-card{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(227, 227, 227);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.txt{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.cardImg{
+    width: 360px;
+}
+.price{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.main-txt{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button{
+    background-color: navy;
+    border: 1px solid rgb(0, 0, 106);
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.room-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.hover-content {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(248, 248, 248);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+}
+
+.room-card:hover .hover-content {
+    top: 0;
+    opacity: 1;
+}
+
+.button {
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.2s;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    background-color: navy;
+    border: 1px solid rgb(0, 0, 106);
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.hover-text {
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.3s;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.room-card:hover .button,
+.room-card:hover .hover-text {
+    transform: translateY(0);
+    opacity: 1;
+}
