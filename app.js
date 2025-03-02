@@ -39,13 +39,15 @@ document.getElementById('bars').addEventListener('click', function() {
 document.addEventListener('click', function(event) {
   const menu = document.querySelector('.main-header');
   const bars = document.getElementById('bars');
-  if (!menu.contains(event.target) && !bars.contains(event.target)) {
+  const burgerContainer = document.querySelector('.burger-container');
+  if (!menu.contains(event.target) && !burgerContainer.contains(event.target)) {
       menu.classList.remove('active');
       bars.classList.add('fa-bars');
       bars.classList.remove('fa-times');
   }
 });
 
+// Close menu when clicking a link (mobile)
 document.querySelectorAll('.head').forEach(link => {
   link.addEventListener('click', () => {
       const menu = document.querySelector('.main-header');

@@ -102,6 +102,7 @@ a{
 
 }
 
+/* General Styles */
 header {
     display: flex;
     justify-content: space-between;
@@ -121,11 +122,24 @@ header {
     text-decoration: none;
 }
 
-#bars {
+/* Burger Container */
+.burger-container {
     display: none;
+    width: 30px;
+    height: 30px;
+    background: #444;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
+#bars {
+    color: white;
+    font-size: 18px;
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
     .main-header {
         display: none;
@@ -137,14 +151,19 @@ header {
         background: #333;
         padding: 1rem;
         z-index: 1000;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .main-header.active {
         display: flex;
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    #bars {
-        display: block;
+    .burger-container {
+        display: flex;
     }
 }
 
