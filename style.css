@@ -57,9 +57,10 @@ section{
 }
 
 .roomImg{
-    width: 800px;
+    width: 700px;
     max-width: 100%;
     border-radius: 4px;
+    padding: 15px;
 }
 
 .priceName{
