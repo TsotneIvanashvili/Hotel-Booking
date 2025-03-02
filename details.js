@@ -41,3 +41,35 @@ fetch(`https://hotelbooking.stepprojects.ge/api/Rooms/GetRoom/${roomId}`)
         
     }
 
+
+    // Toggle menu on burger icon click
+document.getElementById('bars').addEventListener('click', function() {
+    const menu = document.querySelector('.main-header');
+    menu.classList.toggle('active');
+    this.classList.toggle('fa-bars');
+    this.classList.toggle('fa-times');
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.main-header');
+    const bars = document.getElementById('bars');
+    const burgerContainer = document.querySelector('.burger-container');
+    if (!menu.contains(event.target) && !burgerContainer.contains(event.target)) {
+        menu.classList.remove('active');
+        bars.classList.add('fa-bars');
+        bars.classList.remove('fa-times');
+    }
+  });
+  
+  // Close menu when clicking a link (mobile)
+  document.querySelectorAll('.head').forEach(link => {
+    link.addEventListener('click', () => {
+        const menu = document.querySelector('.main-header');
+        if (window.innerWidth <= 768) {
+            menu.classList.remove('active');
+            document.getElementById('bars').classList.add('fa-bars');
+            document.getElementById('bars').classList.remove('fa-times');
+        }
+    });
+  });
