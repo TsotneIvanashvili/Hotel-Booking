@@ -301,3 +301,38 @@ header {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+#bookingsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#bookingsTable th, #bookingsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#bookingsTable th {
+    background-color: #f2f2f2;
+}
+
+.table-image {
+    width: 100px;
+    height: auto;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c82333;
+}

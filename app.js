@@ -1,3 +1,4 @@
+
 let section = document.querySelector(".room-container");
 
 fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll")
