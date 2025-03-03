@@ -109,7 +109,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background: #333;
+    background: navy;
     position: relative;
     margin-bottom: 20px;
 }
@@ -127,9 +127,9 @@ header {
 /* Burger Container */
 .burger-container {
     display: none;
-    width: 30px;
-    height: 30px;
-    background: #444;
+    width: 50px;
+    height: 50px;
+    background: navy;
     border-radius: 5px;
     justify-content: center;
     align-items: center;
@@ -150,13 +150,13 @@ header {
         top: 100%;
         left: 0;
         right: 0;
-        background: #333;
+        background: navy;
         padding: 1rem;
         z-index: 1000;
         opacity: 0;
         transform: translateY(-20px);
         visibility: hidden;
-        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
     }
 
     .main-header.active {
@@ -173,94 +173,131 @@ header {
     width: 80px;
 }
 
-
-.room-card{
+.room-card {
     display: flex;
     flex-direction: column;
-    border: 2px solid rgb(227, 227, 227);
-    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 128, 0.1);
+    border-radius: 12px;
     overflow: hidden;
-}
-.txt{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-.cardImg{
-    width: 360px;
-}
-.price{
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-
-.main-txt{
-    display: flex;
-    justify-content: space-between;
-}
-
-.button{
-    background-color: navy;
-    border: 1px solid rgb(0, 0, 106);
-    padding: 5px;
-    width: 100%;
-    text-align: center;
-}
-
-.room-card {
     position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    color: rgba(5, 153, 5, 0.534);
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cardImg {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-bottom: 3px solid navy;
+    transition: transform 0.3s ease;
+}
+
+.room-card:hover .cardImg {
+    transform: scale(1.02);
+}
+
+.main-txt {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    background: linear-gradient(to bottom, white 50%, #f8f9fa 100%);
+}
+
+.txt h3 {
+    font-size: 1.2rem;
+    color: #001a57;
+    font-weight: 600;
+    margin: 0;
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.price p:first-child {
+    color: navy;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.price p:last-child {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 2px;
 }
 
 .hover-content {
     position: absolute;
-    top: -100%;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgb(248, 248, 248);
+    background: rgba(0, 0, 128, 0.95);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    gap: 15px;
+    justify-content: space-between;
+    padding: 24px;
+    opacity: 0;
+    transform: translateY(100%);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-}
-
-.room-card:hover .hover-content {
-    top: 0;
-    opacity: 1;
-}
-
-.button {
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: all 0.3s ease 0.2s;
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    background-color: navy;
-    border: 1px solid rgb(0, 0, 106);
-    padding: 5px;
-    width: 100%;
-    text-align: center;
     color: white;
 }
 
-.hover-text {
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: all 0.3s ease 0.3s;
-    color: #fff;
-    font-size: 1.2em;
+.room-card:hover .hover-content {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.room-card:hover .button,
-.room-card:hover .hover-text {
-    transform: translateY(0);
-    opacity: 1;
+.name {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hover-content h6 {
+    color: #a8d0ff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.hover-content p {
+    font-size: 1.1rem;
+    color: #fff;
+    margin: 12px 0;
+    font-weight: 500;
+}
+
+.button {
+    background: #001a57;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    margin-top: auto;
+}
+
+.button:hover {
+    background: #000080;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
