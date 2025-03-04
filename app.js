@@ -18,7 +18,8 @@ fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll")
     let availabilityText = item.available ? "Available" : "Not Available";
     let availabilityColor = item.available ? "rgba(5, 153, 5, 0.88)" : "red";
 
-    return `<div class="room-card">
+    return `
+    <div class="room-card">
         <img class="cardImg" src="${item.images[0]?.source}" alt="">
         <div class="main-txt">
             <div class="txt">
@@ -31,8 +32,8 @@ fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll")
         </div>
         <div class="hover-content">
                 <h1 class = "name">${item.name}</h1>
-                <h6>Maximum Guests: ${item.maximumGuests}</h6>
-                <h3 style = "color: ${availabilityColor}">Availability: ${availabilityText}</h3>
+                <h5>Maximum Guests: ${item.maximumGuests}</h5>
+                <h5>Availability: ${availabilityText}</h5>
                 <p>Price Per Night: ${item.pricePerNight}$</p>
             <a onclick="gotoDetails('${item.id}')" class="button">Book Now</a>
         </div>
