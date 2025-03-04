@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+    const bookings = JSON.parse(sessionStorage.getItem('bookings') || '[]');
     const tableBody = document.querySelector('#bookingsList tbody');
 
     if (bookings.length === 0) {
@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td colspan="8" class="no-bookings">
                     <i class="fas fa-calendar-times"></i>
                     <p>No rooms booked yet. Start exploring our rooms!</p>
+                    <a class = "explr" href= "./index.html"><button>Explore</button></a>
                 </td>
+                
             </tr>
         `;
     } else {
@@ -44,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (response.ok) {
                         // Remove the booking from localStorage
                         bookings.splice(index, 1);
-                        localStorage.setItem('bookings', JSON.stringify(bookings));
+                        sessionStorage.setItem('bookings', JSON.stringify(bookings));
 
                         // Remove the row from the table
                         row.remove();
