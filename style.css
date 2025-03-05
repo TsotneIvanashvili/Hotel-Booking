@@ -716,45 +716,57 @@ hr{
     height: 3px;
     background-color: #3498db;
 }
-
-/* Filter Styles */
 .filters {
     padding: 20px;
     background: #f5f5f5;
     margin: 20px;
     border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
+}
+
+#filterForm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
 }
 
-.filters select, 
-.filters input {
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-group select,
+.filter-group input {
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
 }
 
 .filter-buttons {
+    grid-column: 1 / -1;
     display: flex;
     gap: 10px;
+    margin-top: 10px;
 }
 
-.filter-buttons button {
+#applyFilter,
+#reset {
     padding: 10px 20px;
-    background: #007bff;
-    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.filter-buttons button:hover {
-    background: #0056b3;
+#applyFilter {
+    background-color: #007bff;
+    color: white;
 }
 
-.date-filters {
-    display: flex;
-    gap: 10px;
+#reset {
+    background-color: #6c757d;
+    color: white;
 }

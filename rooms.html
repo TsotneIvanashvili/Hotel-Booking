@@ -26,6 +26,36 @@
     <h1 class="aa">Guests Favourites</h1>
     <hr>
     
+    <!-- Add this to rooms.html before the room-container section -->
+<section class="filters">
+    <div class="filter-container">
+        <div class="filter-group">
+            <label>Room Type</label>
+            <select id="roomType">
+                <option value="">All</option>
+                <option value="Single Room">Single Room</option>
+                <option value="Double Room">Double Room</option>
+                <option value="Deluxe Room">Deluxe Room</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Check-in</label>
+            <input type="date" id="checkIn">
+        </div>
+        <div class="filter-group">
+            <label>Check-out</label>
+            <input type="date" id="checkOut">
+        </div>
+        <div class="filter-group">
+            <label>Guests</label>
+            <input type="number" id="guests" value="1" min="1">
+        </div>
+        <div class="filter-buttons">
+            <button class="apply-btn" onclick="applyFilters()">APPLY FILTER</button>
+            <button class="reset-btn" onclick="resetFilters()">RESET</button>
+        </div>
+    </div>
+</section>
 
     <section class="room-container"></section>
 

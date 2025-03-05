@@ -1,16 +1,48 @@
+// Update rooms.js with this code
 let section = document.querySelector(".room-container");
+let allRooms = [];
 
+// Initial load
 fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll")
-  .then(response => response.json())
-  .then(data => {    
-    data.forEach(item => {
+    .then(response => response.json())
+    .then(data => {
+        allRooms = data;
+        populateRooms(data);
+    })
+    .catch(() => console.error("Connection error"));
+
+function applyFilters() {
+    const roomType = document.getElementById('roomType').value;
+    const checkIn = document.getElementById('checkIn').value;
+    const checkOut = document.getElementById('checkOut').value;
+    const guests = parseInt(document.getElementById('guests').value);
+
+    const filtered = allRooms.filter(room => {
+        const typeMatch = !roomType || room.name === roomType;
+        const guestMatch = room.maximumGuests >= guests;
+        return typeMatch && guestMatch;
+    });
+
+    populateRooms(filtered);
+}
+
+function resetFilters() {
+    document.getElementById('roomType').value = '';
+    document.getElementById('checkIn').value = '';
+    document.getElementById('checkOut').value = '';
+    document.getElementById('guests').value = 1;
+    populateRooms(allRooms);
+}
+
+function populateRooms(rooms) {
+    section.innerHTML = '';
+    rooms.forEach(item => {
         section.innerHTML += cardCode(item);
     });
-  })
-  .catch(() => console.error("Connection error"));
+}
 
-
-
+// Keep the existing cardCode and other functions below...
+// Keep the existing cardCode and other functions below...
 
 function cardCode(item) {
 
