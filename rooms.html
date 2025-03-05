@@ -3,202 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Rooms</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        .filter-container {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 8px;
-        }
-
-        .filter-section {
-            flex: 1;
-        }
-
-        .room-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .room-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .room-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .room-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .room-info {
-            padding: 15px;
-        }
-
-        .price-range {
-            width: 100%;
-        }
-
-        .filter-group {
-            margin-bottom: 15px;
-        }
-
-        button {
-            padding: 8px 16px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        .date-inputs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        input[type="date"], input[type="number"] {
-            padding: 6px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-    </style>
+    <title>Rooms</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="shortcut icon" href="./images/3246c6341656085.671ca48e15a9a-removebg-preview.png" type="image/x-icon">
 </head>
 <body>
-    <div class="filter-container">
-        <div class="filter-section">
-            <h3>Filter Rooms</h3>
-            <div class="filter-group">
-                <label><input type="checkbox" class="room-type" value="Single Room"> Single Room</label><br>
-                <label><input type="checkbox" class="room-type" value="Double Room"> Double Room</label><br>
-                <label><input type="checkbox" class="room-type" value="Deluxe Room"> Deluxe Room</label>
-            </div>
-            
-            <div class="filter-group">
-                <label>Price Range:</label>
-                <input type="range" class="price-range" min="0" max="1000" step="50">
-                <span class="price-display">$0 - $1000</span>
-            </div>
+    <header>
+        <img class="logo" src="https://itstep.school.ge/wp-content/uploads/2023/11/logo-ai.png" alt="">
+        <div class="main-header">
+            <a class="head" href="./index.html">Home</a>
+            <a class="head" href="./rooms.html">Rooms</a>
+            <a class="head" href="">Hotels</a>
+            <a class="head" href="./booked.html">Booked Rooms</a>
         </div>
-
-        <div class="filter-section">
-            <div class="date-inputs">
-                <div>
-                    <label>Check-in</label><br>
-                    <input type="date" class="checkin-date">
-                </div>
-                <div>
-                    <label>Check-out</label><br>
-                    <input type="date" class="checkout-date">
-                </div>
-            </div>
-            
-            <div class="filter-group">
-                <label>Guests</label><br>
-                <input type="number" class="guest-count" min="1" value="1">
-            </div>
-            
-            <button class="apply-filter">APPLY FILTER</button>
-            <button class="reset-filter">RESET</button>
+        <div class="burger-container">
+            <i class="fa-solid fa-bars fa-xl" id="bars"></i>
         </div>
-    </div>
+    </header>
 
-    <div class="room-grid" id="roomContainer"></div>
 
-    <script>
-        const rooms = [
-            { id: 1, name: "Single Room", price: 100, image: "single.jpg", type: "Single Room", maxGuests: 1 },
-            { id: 2, name: "Double Room", price: 200, image: "double.jpg", type: "Double Room", maxGuests: 2 },
-            { id: 3, name: "Deluxe Room", price: 500, image: "deluxe.jpg", type: "Deluxe Room", maxGuests: 4 },
-            // Add more room objects as needed
-        ];
+    <h1 class="aa">Guests Favourites</h1>
+    <hr>
+    
 
-        function renderRooms(filteredRooms) {
-            const container = document.getElementById('roomContainer');
-            container.innerHTML = filteredRooms.map(room => `
-                <div class="room-card">
-                    <img src="${room.image}" class="room-image" alt="${room.name}">
-                    <div class="room-info">
-                        <h3>${room.name}</h3>
-                        <p>$${room.price} per night</p>
-                        <button>Book Now</button>
-                    </div>
-                </div>
-            `).join('');
-        }
+    <section class="room-container"></section>
 
-        // Initial render
-        renderRooms(rooms);
-
-        // Filter functionality
-        const priceRange = document.querySelector('.price-range');
-        const priceDisplay = document.querySelector('.price-display');
-        const roomTypes = document.querySelectorAll('.room-type');
-        const checkinDate = document.querySelector('.checkin-date');
-        const checkoutDate = document.querySelector('.checkout-date');
-        const guestCount = document.querySelector('.guest-count');
-
-        function applyFilters() {
-            const selectedTypes = Array.from(roomTypes)
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.value);
-
-            const filtered = rooms.filter(room => {
-                const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(room.type);
-                const priceMatch = room.price <= priceRange.value;
-                const guestMatch = room.maxGuests >= guestCount.value;
-                // Add date availability check here
-                return typeMatch && priceMatch && guestMatch;
-            });
-
-            renderRooms(filtered);
-        }
-
-        priceRange.addEventListener('input', () => {
-            priceDisplay.textContent = `$0 - $${priceRange.value}`;
-        });
-
-        document.querySelector('.apply-filter').addEventListener('click', applyFilters);
-        document.querySelector('.reset-filter').addEventListener('click', () => {
-            roomTypes.forEach(checkbox => checkbox.checked = false);
-            priceRange.value = 1000;
-            priceDisplay.textContent = '$0 - $1000';
-            checkinDate.value = '';
-            checkoutDate.value = '';
-            guestCount.value = 1;
-            renderRooms(rooms);
-        });
-
-        // Initialize date inputs
-        const today = new Date().toISOString().split('T')[0];
-        checkinDate.min = today;
-        checkoutDate.min = today;
-    </script>
+    <script src="rooms.js"></script>
 </body>
 </html>

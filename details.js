@@ -11,7 +11,6 @@ fetch(`https://hotelbooking.stepprojects.ge/api/Rooms/GetRoom/${roomId}`)
         // Add event listener to the book button
         const bookButton = section.querySelector('.book');
         bookButton.addEventListener('click', function() {
-            // Get input values
             const reservationDiv = this.closest('.reservation');
             const inputs = reservationDiv.querySelectorAll('input');
             const [checkIn, checkOut, name, phone] = Array.from(inputs).map(input => input.value);
@@ -22,28 +21,44 @@ fetch(`https://hotelbooking.stepprojects.ge/api/Rooms/GetRoom/${roomId}`)
                 return;
             }
 
-            // Create booking object
-            const booking = {
-                roomId: roomId,
-                roomName: room.name,
-                price: room.pricePerNight,
-                checkIn: checkIn,
-                checkOut: checkOut,
-                customerName: name,
-                customerPhone: phone,
-                image: room.images[0]?.source
-            };
+            try {
+                // Create booking object
+                const booking = {
+                    roomId: roomId,
+                    roomName: room.name,
+                    price: room.pricePerNight,
+                    checkIn: checkIn,
+                    checkOut: checkOut,
+                    customerName: name,
+                    customerPhone: phone,
+                    image: room.images[0]?.source,
+                    isAvailable: false
+                };
 
-            // Save to localStorage
-            let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
-            bookings.push(booking);
-            localStorage.setItem('bookings', JSON.stringify(bookings));
+                // Save to localStorage
+                let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                bookings.push(booking);
+                localStorage.setItem('bookings', JSON.stringify(bookings));
 
-            // Show success message
-            alert('Room Booked Successfully!');
+                // Update room availability in localStorage
+                let rooms = JSON.parse(localStorage.getItem('rooms') || '[]');
+                const roomIndex = rooms.findIndex(r => r.id === roomId);
+                if (roomIndex !== -1) {
+                    rooms[roomIndex].available = false;
+                    localStorage.setItem('rooms', JSON.stringify(rooms));
+                }
 
-            // Optional: Clear form fields
-            inputs.forEach(input => input.value = '');
+                // Show success message
+                alert(`${room.name} Booked Successfully!`);
+
+                // Optional: Clear form fields
+                inputs.forEach(input => input.value = '');
+                
+                // Redirect to booked page
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to book room. Please try again.');
+            }
         });
     })
     .catch(() => {
