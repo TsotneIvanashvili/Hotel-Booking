@@ -13,6 +13,6 @@ function hotelCode(item){
     return `<div class="hotels">
                 <img class = "hotel-img" src="${item.featuredImage}" alt="">
                 <h1>${item.name}</h1>
-                <button id = "hotel-button">View Rooms</button>
+                <button onclick="window.location.href='rooms.html'" id = "hotel-button">View Rooms</button>
             </div>`
 }

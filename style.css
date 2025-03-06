@@ -1066,7 +1066,7 @@ hr{
     left: 50%;
     transform: translateX(-50%);
     padding: 0.8rem 1.5rem;
-    background-color: #00b894;
+    background-color: #1ea5ff;
     color: white;
     border: none;
     border-radius: 8px;
@@ -1074,6 +1074,11 @@ hr{
     cursor: pointer;
     transition: bottom 0.5s ease-in-out;
     z-index: 2; /* Ensure the button is above other elements */
+}
+
+#hotel-button:hover{
+    background-color: #3498db;
+    transition: 0.3s ease-in-out;
 }
 
 /* Hover Effects */
@@ -1110,6 +1115,14 @@ hr{
         font-size: 0.9rem;
     }
 }
-.hotel-container{
-    padding-top: 150px;
+
+
+.hotel-h1{
+    padding-top: 160px;
+    font-size: 40px;
+    color: #0b5484;
+}
+
+.hotels-a{
+    width: 70px;
 }
