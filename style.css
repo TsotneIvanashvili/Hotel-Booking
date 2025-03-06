@@ -772,6 +772,9 @@ hr{
     margin-top: 0.5rem;
     padding: 0 0.5rem;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Responsive Fixes */
@@ -804,7 +807,7 @@ hr{
 
     .apply-btn,
     .reset-btn {
-        width: 100%;
+        width: 180px;
         margin: 0;
         background-color: #3498db;
     }
@@ -822,21 +825,24 @@ hr{
 
 .apply1{
     background-color: #3498db;
+    font-size: 22px;
 }
 
 .reset1{
     background-color: #3498db;
+    font-size: 22px;
+
 }
 
 .apply1:hover{
     transition: all 0.3s ease-in-out;
     background-color: #10527d;
-    font-size: 14px;
+    font-size: 23px;
 }
 
 .reset1:hover{
     background-color: #10527d;
-    font-size: 14px;
+    font-size: 23px;
     transition: all 0.3s ease-in-out;
 }
 
