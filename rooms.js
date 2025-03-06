@@ -1,15 +1,46 @@
-// Update rooms.js with this code
 let section = document.querySelector(".room-container");
 let allRooms = [];
+let roomTypes = [];
 
-// Initial load
-fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll")
-    .then(response => response.json())
-    .then(data => {
-        allRooms = data;
-        populateRooms(data);
-    })
-    .catch(() => console.error("Connection error"));
+// Fetch both rooms and room types
+Promise.all([
+    fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll"),
+    fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetRoomTypes")
+])
+.then(async ([roomsResponse, typesResponse]) => {
+    if (!roomsResponse.ok || !typesResponse.ok) {
+        throw new Error("Failed to fetch data");
+    }
+
+    const roomsData = await roomsResponse.json();
+    const typesData = await typesResponse.json();
+    
+    // Store both datasets
+    allRooms = roomsData;
+    roomTypes = typesData;
+    
+    // Populate room type dropdown
+    populateRoomTypeFilter(typesData);
+    
+    // Initial display
+    populateRooms(roomsData); // Ensure this function is called correctly
+})
+.catch((error) => {
+    console.error("Error fetching data:", error);
+    section.innerHTML = "<p>Failed to load rooms. Please try again later.</p>";
+});
+
+function populateRoomTypeFilter(types) {
+    const roomTypeSelect = document.getElementById('roomType');
+    roomTypeSelect.innerHTML = '<option value="">All</option>';
+    
+    types.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type.name;
+        option.textContent = type.name;
+        roomTypeSelect.appendChild(option);
+    });
+}
 
 function applyFilters() {
     const roomType = document.getElementById('roomType').value;
@@ -18,7 +49,9 @@ function applyFilters() {
     const guests = parseInt(document.getElementById('guests').value);
 
     const filtered = allRooms.filter(room => {
-        const typeMatch = !roomType || room.name === roomType;
+        // Find the room type name using roomTypeId
+        const type = roomTypes.find(t => t.id === room.roomTypeId);
+        const typeMatch = !roomType || type?.name === roomType;
         const guestMatch = room.maximumGuests >= guests;
         return typeMatch && guestMatch;
     });
@@ -36,16 +69,16 @@ function resetFilters() {
 
 function populateRooms(rooms) {
     section.innerHTML = '';
-    rooms.forEach(item => {
-        section.innerHTML += cardCode(item);
-    });
+    if (rooms.length === 0) {
+        section.innerHTML = "<p>No rooms found.</p>";
+    } else {
+        rooms.forEach(item => {
+            section.innerHTML += cardCode(item);
+        });
+    }
 }
 
-// Keep the existing cardCode and other functions below...
-// Keep the existing cardCode and other functions below...
-
 function cardCode(item) {
-
     let availabilityText = item.available ? "Available" : "Not Available";
     let availabilityColor = item.available ? "rgba(5, 153, 5, 0.88)" : "red";
 
@@ -62,15 +95,13 @@ function cardCode(item) {
             </div>
         </div>
         <div class="hover-content">
-                <h1 class = "name">${item.name}</h1>
+                <h1 class="name">${item.name}</h1>
                 <h5>Maximum Guests: ${item.maximumGuests}</h5>
                 <h5>Availability: ${availabilityText}</h5>
                 <p>Price Per Night: ${item.pricePerNight}$</p>
             <a onclick="gotoDetails('${item.id}')" class="button">Book Now</a>
         </div>
     </div>`;
-
-
 }
 
 function gotoDetails(roomId) {

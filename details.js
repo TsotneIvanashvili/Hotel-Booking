@@ -79,7 +79,7 @@ function roomCode(room) {
                 <label>Customer Name</label>
                 <input type="text" placeholder="Please Enter Your Name">
                 <label>Customer Tel:Phone</label>
-                <input type="text" placeholder="Please Enter Your Phone Number">
+                <input type="number"  placeholder="Please Enter Your Phone Number">
                 <button class="book">BOOK NOW</button>
             </div>
         </div>`;

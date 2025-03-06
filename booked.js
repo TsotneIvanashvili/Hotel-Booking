@@ -8,16 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const index = parseInt(row.getAttribute('data-index'));
             
             // Remove from localStorage
+            const bookingId = bookings[index].roomId;
             bookings.splice(index, 1);
             localStorage.setItem('bookings', JSON.stringify(bookings));
             
             // Remove from DOM
             row.remove();
             
-            // Show success message
+            // Update availability in other tabs
+            localStorage.setItem('availabilityUpdate', Date.now());
+            
             alert('Room deleted successfully!');
             
-            // If no more bookings, refresh to show empty state
             if (bookings.length === 0) {
                 renderBookings();
             }

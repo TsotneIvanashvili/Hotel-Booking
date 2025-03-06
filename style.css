@@ -716,57 +716,274 @@ hr{
     height: 3px;
     background-color: #3498db;
 }
+
+/* Filters Section Styles */
 .filters {
-    padding: 20px;
-    background: #f5f5f5;
-    margin: 20px;
-    border-radius: 8px;
+    background-color: #f8f9fa;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    box-sizing: border-box;
 }
 
-#filterForm {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+.filter-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-sizing: border-box;
 }
 
 .filter-group {
-    display: flex;
-    flex-direction: column;
+    flex: 1 1 200px;
+    min-width: 0; /* Crucial for preventing overflow */
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
 }
 
 .filter-group label {
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2d3436;
+    font-size: 0.9rem;
 }
 
 .filter-group select,
-.filter-group input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.filter-group input[type="date"],
+.filter-group input[type="number"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: white;
+    height: 48px;
+    box-sizing: border-box;
 }
 
 .filter-buttons {
-    grid-column: 1 / -1;
+    flex: 1 1 100%;
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
 }
 
-#applyFilter,
-#reset {
-    padding: 10px 20px;
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    .filter-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0;
+    }
+
+    .filter-group {
+        flex: 1 1 auto;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 0.75rem;
+    }
+
+    .filter-group select,
+    .filter-group input[type="date"],
+    .filter-group input[type="number"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .apply-btn,
+    .reset-btn {
+        width: 100%;
+        margin: 0;
+        background-color: #3498db;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .filter-container {
+        gap: 0.75rem;
+    }
+    
+    .filter-group {
+        flex: 1 1 45%;
+    }
+}
+
+.apply1{
+    background-color: #3498db;
+}
+
+.reset1{
+    background-color: #3498db;
+}
+
+.apply1:hover{
+    transition: all 0.3s ease-in-out;
+    background-color: #10527d;
+    font-size: 14px;
+}
+
+.reset1:hover{
+    background-color: #10527d;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Room Card Container */
+.room-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: #fff;
+    opacity: 0; /* Start invisible for animation */
+    transform: translateY(20px); /* Start slightly below for animation */
+    animation: fadeInUp 0.6s ease-in-out forwards;
+}
+
+/* Keyframes for fadeInUp Animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Card Image */
+.cardImg {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Main Text Section */
+.main-txt {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0 0 12px 12px;
+}
+
+.txt h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #2d3436;
+}
+
+.price {
+    text-align: right;
+    font-weight: 600;
+    color: #00b894;
+}
+
+.price p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Hover Content */
+.hover-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:#1ea5ffb8;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hover-content h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.hover-content h5 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.hover-content p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.hover-content .button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: navy;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-#applyFilter {
-    background-color: #007bff;
+.hover-content .button:hover {
+    background-color:#1ea5ff;
     color: white;
 }
 
-#reset {
-    background-color: #6c757d;
-    color: white;
+/* Hover Effects */
+.room-card:hover .hover-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.room-card:hover .cardImg {
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .room-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .cardImg {
+        height: 150px;
+    }
+
+    .hover-content {
+        padding: 1rem;
+    }
+
+    .hover-content h1 {
+        font-size: 1.25rem;
+    }
+
+    .hover-content h5 {
+        font-size: 0.9rem;
+    }
+
+    .hover-content p {
+        font-size: 0.9rem;
+    }
 }
