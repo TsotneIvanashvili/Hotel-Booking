@@ -1,4 +1,3 @@
-document.getElementById('currentYear').textContent = new Date().getFullYear();
 
 let url = window.location.href;
 let roomId = url.split('id=')[1];
