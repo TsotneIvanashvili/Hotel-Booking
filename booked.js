@@ -1,3 +1,5 @@
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
 document.addEventListener('DOMContentLoaded', () => {
     const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
     const tableBody = document.querySelector('#bookingsList tbody');

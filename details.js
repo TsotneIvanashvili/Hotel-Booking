@@ -1,3 +1,5 @@
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
 let url = window.location.href;
 let roomId = url.split('id=')[1];
 let section = document.querySelector(".room-container");

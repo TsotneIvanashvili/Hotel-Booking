@@ -1,4 +1,6 @@
 let section = document.querySelector(".hotel-container");
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
 
 
 fetch("https://hotelbooking.stepprojects.ge/api/Hotels/GetAll")

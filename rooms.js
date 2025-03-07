@@ -1,4 +1,6 @@
 let section = document.querySelector(".room-container");
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
 let allRooms = [];
 let roomTypes = [];
 
