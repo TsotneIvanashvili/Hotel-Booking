@@ -6,24 +6,20 @@ let section = document.querySelector(".room-container");
 fetch(`https://hotelbooking.stepprojects.ge/api/Rooms/GetRoom/${roomId}`)
     .then(response => response.json())
     .then(room => {
-        // Add room HTML to the page
         section.innerHTML += roomCode(room);
 
-        // Add event listener to the book button
         const bookButton = section.querySelector('.book');
         bookButton.addEventListener('click', function() {
             const reservationDiv = this.closest('.reservation');
             const inputs = reservationDiv.querySelectorAll('input');
             const [checkIn, checkOut, name, phone] = Array.from(inputs).map(input => input.value);
 
-            // Validate inputs
             if (!checkIn || !checkOut || !name || !phone) {
                 alert('Please fill in all fields');
                 return;
             }
 
             try {
-                // Create booking object
                 const booking = {
                     roomId: roomId,
                     roomName: room.name,
@@ -36,12 +32,10 @@ fetch(`https://hotelbooking.stepprojects.ge/api/Rooms/GetRoom/${roomId}`)
                     isAvailable: false
                 };
 
-                // Save to localStorage
                 let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
                 bookings.push(booking);
                 localStorage.setItem('bookings', JSON.stringify(bookings));
 
-                // Update room availability in localStorage
                 let rooms = JSON.parse(localStorage.getItem('rooms') || '[]');
                 const roomIndex = rooms.findIndex(r => r.id === roomId);
                 if (roomIndex !== -1) {
@@ -49,13 +43,10 @@ fetch(`https://hotelbooking.stepprojects.ge/api/Rooms/GetRoom/${roomId}`)
                     localStorage.setItem('rooms', JSON.stringify(rooms));
                 }
 
-                // Show success message
                 alert(`${room.name} Booked Successfully!`);
 
-                // Optional: Clear form fields
                 inputs.forEach(input => input.value = '');
                 
-                // Redirect to booked page
             } catch (error) {
                 console.error('Error:', error);
                 alert('Failed to book room. Please try again.');
@@ -86,7 +77,6 @@ function roomCode(room) {
         </div>`;
 }
 
-// Toggle menu on burger icon click
 document.getElementById('bars').addEventListener('click', function() {
     const menu = document.querySelector('.main-header');
     menu.classList.toggle('active');
@@ -94,7 +84,6 @@ document.getElementById('bars').addEventListener('click', function() {
     this.classList.toggle('fa-times');
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', function(event) {
     const menu = document.querySelector('.main-header');
     const bars = document.getElementById('bars');
@@ -106,7 +95,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Close menu when clicking a link (mobile)
 document.querySelectorAll('.head').forEach(link => {
     link.addEventListener('click', () => {
         const menu = document.querySelector('.main-header');

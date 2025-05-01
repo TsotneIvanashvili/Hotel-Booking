@@ -4,7 +4,6 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
 let allRooms = [];
 let roomTypes = [];
 
-// Fetch both rooms and room types
 Promise.all([
     fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll"),
     fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetRoomTypes")
@@ -17,15 +16,12 @@ Promise.all([
     const roomsData = await roomsResponse.json();
     const typesData = await typesResponse.json();
     
-    // Store both datasets
     allRooms = roomsData;
     roomTypes = typesData;
     
-    // Populate room type dropdown
     populateRoomTypeFilter(typesData);
     
-    // Initial display
-    populateRooms(roomsData); // Ensure this function is called correctly
+    populateRooms(roomsData); 
 })
 .catch((error) => {
     console.error("Error fetching data:", error);
@@ -51,7 +47,6 @@ function applyFilters() {
     const guests = parseInt(document.getElementById('guests').value);
 
     const filtered = allRooms.filter(room => {
-        // Find the room type name using roomTypeId
         const type = roomTypes.find(t => t.id === room.roomTypeId);
         const typeMatch = !roomType || type?.name === roomType;
         const guestMatch = room.maximumGuests >= guests;
@@ -110,7 +105,6 @@ function gotoDetails(roomId) {
     window.location.href = `details.html?id=${roomId}`;
 }
 
-// Toggle menu on burger icon click
 document.getElementById('bars').addEventListener('click', function() {
   let menu = document.querySelector('.main-header');
   menu.classList.toggle('active');
@@ -118,7 +112,6 @@ document.getElementById('bars').addEventListener('click', function() {
   this.classList.toggle('fa-times');
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', function(event) {
   let menu = document.querySelector('.main-header');
   let bars = document.getElementById('bars');
@@ -130,7 +123,6 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// Close menu when clicking a link (mobile)
 document.querySelectorAll('.head').forEach(link => {
   link.addEventListener('click', () => {
       let menu = document.querySelector('.main-header');

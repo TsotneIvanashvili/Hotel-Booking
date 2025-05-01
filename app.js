@@ -6,7 +6,6 @@ let section = document.querySelector(".room-container");
 fetch("https://hotelbooking.stepprojects.ge/api/Rooms/GetAll")
   .then(response => response.json())
   .then(data => {
-    // Limit the data to the first 9 items
     let limitedData = data.slice(0, 9);
     
     limitedData.forEach(item => {
@@ -49,7 +48,6 @@ function gotoDetails(roomId) {
     window.location.href = `details.html?id=${roomId}`;
 }
 
-// Toggle menu on burger icon click
 document.getElementById('bars').addEventListener('click', function() {
   let menu = document.querySelector('.main-header');
   menu.classList.toggle('active');
@@ -57,7 +55,6 @@ document.getElementById('bars').addEventListener('click', function() {
   this.classList.toggle('fa-times');
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', function(event) {
   let menu = document.querySelector('.main-header');
   let bars = document.getElementById('bars');
@@ -69,7 +66,6 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// Close menu when clicking a link (mobile)
 document.querySelectorAll('.head').forEach(link => {
   link.addEventListener('click', () => {
       let menu = document.querySelector('.main-header');

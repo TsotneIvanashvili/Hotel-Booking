@@ -9,15 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = button.closest('tr');
             const index = parseInt(row.getAttribute('data-index'));
             
-            // Remove from localStorage
             const bookingId = bookings[index].roomId;
             bookings.splice(index, 1);
             localStorage.setItem('bookings', JSON.stringify(bookings));
             
-            // Remove from DOM
             row.remove();
             
-            // Update availability in other tabs
             localStorage.setItem('availabilityUpdate', Date.now());
             
             alert('Room deleted successfully!');
@@ -40,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </tr>
             `;
         } else {
-            tableBody.innerHTML = ''; // Clear existing rows
+            tableBody.innerHTML = ''; 
             bookings.forEach((booking, index) => {
                 tableBody.innerHTML += `
                     <tr data-index="${index}">
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             });
 
-            // Add event listeners to delete buttons
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', () => deleteBooking(button));
             });
@@ -71,8 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderBookings();
 });
 
-// Rest of your existing JS code remains unchanged...
-// Toggle menu on burger icon click
 document.getElementById('bars').addEventListener('click', function() {
     const menu = document.querySelector('.main-header');
     menu.classList.toggle('active');
@@ -80,7 +74,6 @@ document.getElementById('bars').addEventListener('click', function() {
     this.classList.toggle('fa-times');
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', function(event) {
     const menu = document.querySelector('.main-header');
     const bars = document.getElementById('bars');
@@ -92,7 +85,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Close menu when clicking a link (mobile)
 document.querySelectorAll('.head').forEach(link => {
     link.addEventListener('click', () => {
         const menu = document.querySelector('.main-header');
